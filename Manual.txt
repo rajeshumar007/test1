@@ -1,0 +1,35 @@
+Manual
+
+Inside the Dockerfile update the .onion site before use
+
+*for single container Test
+Ctrl + C (to exit a current running process)
+---------------------------------------
+docker build -t tor-python-simple .
+docker run --rm -it tor-python-simple
+--------------------------------------
+
+*For multiple containers
+
+the number 100 indicates the number of containers(change it to any numberu desire)
+
+
+------------------------------
+docker build -t tor-python-simple .
+for i in {1..100}
+do
+    docker run -d --name "tor-container-$i" tor-python-simple
+    echo "Started tor-container-$i"
+done
+-------------------------------------
+
+
+*To stop and remove all containers
+
+------------------------------
+docker rm -f $(docker ps -aq)
+-------------------------------
+
+if any attempt fails dont worry its an infinite loop (might be server unreachable or time-out)
+
+before runing multiple containers - test 1 container
